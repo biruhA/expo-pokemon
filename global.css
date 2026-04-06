@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colors - Light Mode (Default) */
+    --color-primary: #2196f3;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #f3f4f6;
+    --color-secondary-foreground: #1a1c1c;
+    --color-background: #ffffff;
+    --color-surface: #f9f9f9;
+    --color-surface-variant: #eeeeee;
+    --color-border: #bfc7d4;
+    --color-text: #1a1c1c;
+    --color-text-muted: #1a1c1c99;
+
+    /* Pokémon Type Colors */
+    --color-type-grass: #78c850;
+    --color-type-poison: #a040a0;
+    --color-type-fire: #f08030;
+    --color-type-water: #6890f0;
+    --color-type-electric: #f8d030;
+    --color-type-flying: #a890f0;
+    --color-type-normal: #a8a878;
+
+    /* Spacing & Sizing */
+    --spacing-screen-edge: 24px;
+    --spacing-card-gap: 16px;
+    --spacing-section-gap: 32px;
+    --radius-small: 8px;
+    --radius-medium: 12px;
+    --radius-large: 24px;
+
+    /* Typography */
+    --font-family-primary: "Space Grotesk", sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+    --font-size-3xl: 48px;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary: #60a5fa;
+      --color-background: #1a1c1c;
+      --color-surface: #2d2d2d;
+      --color-border: #bfc7d426;
+      --color-text: #f9f9f9;
+      --color-text-muted: #f9f9f999;
+    }
+  }
+}
