@@ -1,50 +1,97 @@
-# Welcome to your Expo app 👋
+# Pokédex — Expo App 👾
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A high-performance Pokédex built with [Expo](https://expo.dev) and [PokeAPI](https://pokeapi.co/), featuring infinite scrolling, debounced search, and a modern UI.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) **v18 or later**
+- [Expo Go](https://expo.dev/go) app on your phone, or an Android/iOS simulator
 
 ## Get started
 
-1. Install dependencies
+1. **Clone the repo and install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Create a `.env` file** in the root of the project:
+
+   ```bash
+   EXPO_PUBLIC_API_URL=https://pokeapi.co/api/v2/
+   ```
+
+   > This is a public API so the value is safe to share — the file just isn't committed to keep the setup explicit.
+
+3. **Start the app**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   From the terminal output you can open the app in:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - [Expo Go](https://expo.dev/go) (scan the QR code)
+   - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+   - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## Screenshots
 
-When you're ready, run:
+| Home Page | Pokémon Details Page |
+| ------------------------------------------ | ------------------------------------------------------- |
+| ![Home Page](assets/screenshots/image.png) | ![Pokemon Details Page](assets/screenshots/image-1.png) |
 
-```bash
-npm run reset-project
+---
+
+## Features & Design Decisions
+
+### UI
+Designed in [Google Stitch](https://stitch.withgoogle.com/) for speed, then implemented with **NativeWind (Tailwind CSS for React Native)** and **React Native Paper** components.
+
+### Home Page — Infinite Scroll
+The home screen uses `FlatList` with **cursor-based pagination** to load Pokémon in batches, improving performance while keeping the experience smooth.
+
+### Search Page — Debounced Search
+Search uses a custom `useDebounce` hook (`hooks/useDebounce.tsx`) with a 400ms delay, so the filter only runs after the user stops typing — avoiding unnecessary re-renders on every keystroke.
+
+### Data Fetching
+- **[Tanstack Query v4](https://tanstack.com/query/v4)** — for server state, caching, and pagination. Chosen over RTK Query for its simplicity at this project scale.
+- **[Axios v1.14.0](https://axios-http.com/)** — pinned to `1.14.0` to avoid a bug introduced in `1.14.1`.
+
+### Tech Stack
+
+| Library | Purpose |
+|---|---|
+| `expo-router` | File-based navigation |
+| `@tanstack/react-query` | Data fetching & caching |
+| `axios` | HTTP client |
+| `nativewind` | Tailwind CSS styling |
+| `react-native-paper` | UI component library |
+| `expo-image` | Optimized image loading with blurhash placeholders |
+
+---
+
+## Project Structure
+
+```
+app/              # File-based routes (Expo Router)
+  _layout.tsx     # Root layout
+  index.tsx       # Home — infinite scroll list
+  search.tsx      # Search with debounce
+  detail.tsx      # Pokémon detail screen
+api/              # API service layer (Axios + PokeAPI)
+components/       # Reusable UI components
+hooks/            # Custom hooks (e.g. useDebounce)
+constants/        # App-wide constants
+assets/           # Images, fonts, screenshots
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Learn More
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo docs](https://docs.expo.dev/)
+- [Expo Router](https://docs.expo.dev/router/introduction/)
+- [PokeAPI](https://pokeapi.co/)

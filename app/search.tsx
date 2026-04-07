@@ -2,11 +2,13 @@ import { PokemonService } from "@/api/pokemon.service";
 import SafeView from "@/components/SafeView";
 import SearchHeader from "@/components/SearchHeader";
 import SearchResults from "@/components/SearchResults";
+import useDebounce from "@/hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedQuery = useDebounce(searchQuery, 400);
 
   const { data } = useQuery({
     queryKey: ["getPokemons"],
@@ -15,15 +17,15 @@ const SearchScreen = () => {
   });
 
   const filteredData = useMemo(() => {
-    if (!searchQuery) return [];
+    if (!debouncedQuery) return [];
     return (
       data?.results
         ?.filter((p: any) =>
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()),
+          p.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
         )
         .slice(0, 10) ?? []
     );
-  }, [searchQuery, data]);
+  }, [debouncedQuery, data]);
 
   return (
     <SafeView
