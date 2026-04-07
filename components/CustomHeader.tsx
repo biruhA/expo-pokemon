@@ -31,7 +31,6 @@ const CustomHeader = ({
       </View>
 
       <View className="flex-row items-center gap-1">
-        {/* Search Icon - Distinct blue color from the design */}
         <IconButton
           icon="magnify"
           size={30}
@@ -40,7 +39,6 @@ const CustomHeader = ({
             router.push("/search");
           }}
         />
-        {/* Profile Avatar */}
         {!noProfile && (
           <Avatar.Image
             size={32}

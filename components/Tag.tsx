@@ -17,7 +17,7 @@ type TagProps = {
   color?: TagColor;
 };
 
-const COLOR_MAP: Record<TagColor, { bg: string; text: string }> = {
+const ColorMap: Record<TagColor, { bg: string; text: string }> = {
   primary: { bg: "bg-primary-dark/10", text: "text-primary-dark" },
   blue: { bg: "bg-blue-100", text: "text-blue-800" },
   green: { bg: "bg-green-100", text: "text-green-800" },
@@ -40,7 +40,7 @@ const Tag = ({ children, size = "small", color = "default" }: TagProps) => {
     textSize = "text-base";
   }
 
-  const { bg, text } = COLOR_MAP[color] || COLOR_MAP.default;
+  const { bg, text } = ColorMap[color] || ColorMap.default;
 
   return (
     <View className={`${padding} ${bg} rounded-full self-start`}>

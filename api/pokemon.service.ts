@@ -1,21 +1,21 @@
 import apiClient from "./clients";
-import { ENDPOINTS } from "./endpoints";
 
 export const PokemonService = {
   getPokemons: async (): Promise<any> => {
-    const { data } = await apiClient.get("/pokemon");
+    const { data } = await apiClient.get("/pokemon?limit=2000");
     return data;
   },
 
   getPokemonsInfinite: async ({ pageParam }: { pageParam?: string }) => {
-    const url = pageParam || ENDPOINTS.POKEMON.LIST;
+    const url = pageParam || "/pokemon?limit=20&offset=0";
     const { data } = await apiClient.get(url);
     return data;
   },
+
   getFullPokemonData: async (name: string) => {
     const [detailRes, speciesRes] = await Promise.all([
-      apiClient.get(ENDPOINTS.POKEMON.DETAILS(name)),
-      apiClient.get(ENDPOINTS.POKEMON.SPECIES(name)),
+      apiClient.get(`/pokemon/${name}`),
+      apiClient.get(`/pokemon-species/${name}`),
     ]);
 
     return {

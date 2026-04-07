@@ -1,41 +1,41 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import SearchCards, { Result } from "./SearchCards";
+import EmptySearchState from "./EmptySearchState";
+import SearchCards from "./SearchCards";
 
-const DUMMY_RESULTS: Result[] = [
-  {
-    id: "#001",
-    name: "Bulbasaur",
-    tag: ["Grass", "Poison"],
-  },
-  {
-    id: "#004",
-    name: "Charmander",
-    tag: ["Fire"],
-  },
-  {
-    id: "#007",
-    name: "Squirtle",
-    tag: ["Water"],
-  },
-];
-
-const SearchResults = () => {
+const SearchResults = ({
+  filteredData,
+  searchQuery,
+  onClear,
+}: {
+  filteredData: any[];
+  searchQuery: string;
+  onClear: () => void;
+}) => {
   return (
-    <View className="my-6">
-      <View className="flex-row gap-3 items-baseline">
-        <Text className="text-xl font-bold text-text">Search Results</Text>
-        <Text className="text-sm font-medium text-text-muted">
-          {DUMMY_RESULTS.length} MATCHES
-        </Text>
-      </View>
+    <View className="my-6 flex-1">
+      {filteredData.length >= 1 && (
+        <View className="flex-row gap-3 items-baseline">
+          <Text className="text-2xl font-extrabold text-text">Results</Text>
+          <Text className="text-sm font-medium text-text-muted">
+            {filteredData.length} MATCHES
+          </Text>
+        </View>
+      )}
       <FlatList
-        data={DUMMY_RESULTS}
+        data={filteredData}
+        ListEmptyComponent={() =>
+          searchQuery.length > 0 && (
+            <EmptySearchState searchQuery={searchQuery} onClear={onClear} />
+          )
+        }
         renderItem={({ item }) => <SearchCards result={item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.name}
         showsVerticalScrollIndicator={false}
         className="mt-6"
-        contentContainerClassName="gap-3"
+        contentContainerClassName={
+          filteredData.length === 0 ? "flex-1" : "gap-3 pb-10"
+        }
       />
     </View>
   );

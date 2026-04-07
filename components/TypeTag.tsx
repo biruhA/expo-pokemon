@@ -1,7 +1,7 @@
 import React from "react";
 import Tag, { TagColor } from "./Tag";
 
-const TYPE_COLORS: Record<string, TagColor> = {
+const TypeColors: Record<string, TagColor> = {
   FIRE: "yellow",
   WATER: "blue",
   GRASS: "green",
@@ -16,7 +16,7 @@ const TYPE_COLORS: Record<string, TagColor> = {
 };
 
 const TypeTag = ({ name }: { name: string }) => {
-  const color = TYPE_COLORS[name.toUpperCase()] || "default";
+  const color = TypeColors[name.toUpperCase()] || "default";
   return <Tag color={color}>{name}</Tag>;
 };
 

@@ -2,12 +2,10 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Card from "./Card";
-import Tag from "./Tag";
 
 export type Result = {
-  id: string;
+  url: string;
   name: string;
-  tag: string[];
 };
 
 function SearchCards({ result }: { result: Result }) {
@@ -24,14 +22,9 @@ function SearchCards({ result }: { result: Result }) {
           <Text className="text-lg font-extrabold text-text">
             {result.name}
           </Text>
-          <View className="flex-row gap-2">
-            {result.tag.map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
-          </View>
         </View>
         <Text className="text-lg font-semibold text-teal-400/50">
-          {result.id}
+          #{String(result.url.split("/")[6]).padStart(3, "0")}
         </Text>
       </TouchableOpacity>
     </Card>

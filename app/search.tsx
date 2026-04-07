@@ -1,12 +1,44 @@
+import { PokemonService } from "@/api/pokemon.service";
 import SafeView from "@/components/SafeView";
 import SearchHeader from "@/components/SearchHeader";
 import SearchResults from "@/components/SearchResults";
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useMemo, useState } from "react";
 
 const SearchScreen = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { data } = useQuery({
+    queryKey: ["getPokemons"],
+    queryFn: PokemonService.getPokemons,
+    staleTime: Infinity,
+  });
+
+  const filteredData = useMemo(() => {
+    if (!searchQuery) return [];
+    return (
+      data?.results
+        ?.filter((p: any) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
+        .slice(0, 10) ?? []
+    );
+  }, [searchQuery, data]);
+
   return (
-    <SafeView header={<SearchHeader />}>
-      <SearchResults />
+    <SafeView
+      header={
+        <SearchHeader
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+      }
+    >
+      <SearchResults
+        filteredData={filteredData}
+        searchQuery={searchQuery}
+        onClear={() => setSearchQuery("")}
+      />
     </SafeView>
   );
 };
