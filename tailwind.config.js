@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         primary: "var(--color-primary)",
         "primary-foreground": "var(--color-primary-foreground)",
+        "primary-dark": "var(--color-primary-dark)",
         secondary: "var(--color-secondary)",
         "secondary-foreground": "var(--color-secondary-foreground)",
         background: "var(--color-background)",
@@ -15,6 +16,7 @@ module.exports = {
         border: "var(--color-border)",
         text: "var(--color-text)",
         "text-muted": "var(--color-text-muted)",
+        "text-primary-dark": "var(--color-text-primary-dark)",
         types: {
           grass: "var(--color-type-grass)",
           poison: "var(--color-type-poison)",

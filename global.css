@@ -6,15 +6,17 @@
   :root {
     /* Colors - Light Mode (Default) */
     --color-primary: #2196f3;
+    --color-primary-dark: #0061a4;
     --color-primary-foreground: #ffffff;
     --color-secondary: #f3f4f6;
     --color-secondary-foreground: #1a1c1c;
-    --color-background: #ffffff;
+    --color-background: #f1f1f1;
     --color-surface: #f9f9f9;
     --color-surface-variant: #eeeeee;
     --color-border: #bfc7d4;
     --color-text: #1a1c1c;
-    --color-text-muted: #1a1c1c99;
+    --color-text-muted: #9ea2a7;
+    --color-text-primary-dark: #0061a4;
 
     /* Pokémon Type Colors */
     --color-type-grass: #78c850;
