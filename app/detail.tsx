@@ -14,27 +14,6 @@ function DetailScreen() {
 
   const { data: pokemonData } = usePokemonFullData(name as string);
 
-  console.log({
-    DetailHeader: {
-      name: pokemonData?.name,
-      id: pokemonData?.id,
-      types: pokemonData?.types,
-      imageUri:
-        pokemonData?.sprites?.other?.["official-artwork"]?.front_default,
-    },
-    DimentionsCard: {
-      height: pokemonData?.height,
-      weight: pokemonData?.weight,
-      baseExperience: pokemonData?.base_experience,
-    },
-    CombatMetrics: {
-      stats: pokemonData?.stats,
-    },
-    SpecialAbilities: {
-      abilities: pokemonData?.abilities,
-    },
-  });
-
   return (
     <SafeView
       className="px-6 gap-4"
